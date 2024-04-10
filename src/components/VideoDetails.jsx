@@ -9,6 +9,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import Button from "@mui/material/Button";
 import VideoDetailsApi from "../utils/VideoDetailsApi";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const VideoDetails = ({
   mainVideoId,
@@ -19,6 +20,9 @@ const VideoDetails = ({
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [subscribed, setSubscribed] = useState(false);
+  const [liked, setliked] = useState(false);
+
 
   useEffect(() => {
     const fetchVideoDetails = async () => {
@@ -68,15 +72,11 @@ const VideoDetails = ({
   };
 
   if (loading) {
-    // Display a skeleton using Youtube component while loading
     return (
       <div className="pt-20 p-5 lg:px-20 lg:flex overflow-hidden w-full gap-6 bg-black text-white mx-auto">
         <div className="lg:w-[70%] h-full">
           <Youtube />
         </div>
-        {/* <div className="lg:w-[30%]">
-          <Youtube/>
-        </div> */}
         <div className="lg:w-[30%] grid ">
           {[...Array(2)].map((_, index) => (
             <Youtube key={index}/>
@@ -92,11 +92,18 @@ const VideoDetails = ({
 
   const formattedDate = formatDistanceToNow(
     new Date(videoData.snippet.publishedAt)
-    // { addSuffix: true }
   );
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
+  const handleSubscribe = () => {
+    setSubscribed(!subscribed);
+  };
+  const handlelike = () => {
+    setliked(!liked);
   };
 
   return (
@@ -111,6 +118,8 @@ const VideoDetails = ({
                 className="react-player mx-auto rounded-2xl"
                 width="100%"
                 controls
+                playing={true}
+                
               />
             )}
             </div>
@@ -132,21 +141,23 @@ const VideoDetails = ({
                     >
                       <p className="text-base sm:text-lg font-semibold py-3">
                         <AccountCircleOutlinedIcon sx={{ fontSize: 40 }} />{" "}
-                        <span className="hover:underline">
+                        <span className="hover:underline underline sm:no-underline">
                           {videoData.snippet.channelTitle}
                         </span>
                       </p>
                     </Link>
                   </div>
                   <div>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      sx={{ borderRadius: 10, mr: 3 }}
-                    >
-                      Subscribe
-                    </Button>
-                    <ThumbUpOffAltIcon />{" "}
+                  <Button
+                  // variant="contained"
+                  variant={subscribed ? "outlined" : "contained"}
+                  color={subscribed ? "success" : "error"}
+                  sx={{ borderRadius: 10, my: 3 }}
+                  onClick={handleSubscribe}
+                >
+                  {subscribed ? "Subscribed🔔" : "Subscribe"}
+                </Button>
+                    <span onClick={handlelike}>{liked? <ThumbUpIcon/>: <ThumbUpOffAltIcon />}</span>{" "}
                     {formatViews(parseInt(videoData.statistics.likeCount))}
                   </div>
                 </div>

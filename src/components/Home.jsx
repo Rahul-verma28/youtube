@@ -3,7 +3,6 @@ import Video from "./Video";
 import { Link } from "react-router-dom";
 import SuggestedvideoApi from "../utils/SuggestedvideoApi";
 import Youtube from "./Youtube";
-import OptionsBar from "./OptionsBar";
 
 const Home = ({ setmainVideoId, mainVideoId, setchannelId }) => {
   const [relatedVideos, setRelatedVideos] = useState([]);
@@ -41,16 +40,14 @@ const Home = ({ setmainVideoId, mainVideoId, setchannelId }) => {
 
   return (
     <div className="pt-16 bg-black text-white w-full">
-      <OptionsBar />
       {loading ? (
-        // <Loader />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 p-5 md:px-10 mx-auto gap-5 ">
           {[...Array(6)].map((_, index) => (
             <Youtube key={index}/>
           ))}
         </div>
       ) : error ? (
-        <p>Error: {error}</p> // Display error message
+        <p>Error: {error}</p> 
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 p-5 md:px-10 mx-auto gap-5">
           {relatedVideos.map((video) => (

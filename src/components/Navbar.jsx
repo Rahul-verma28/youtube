@@ -72,9 +72,9 @@ const Navbar = ({ setsearchedText }) => {
             noWrap
             component="div"
             className="ps-2 bg-black"
+            onClick={scrollToTop()}
           >
-            <YouTubeIcon sx={{ color: red[600], fontSize: 30 }} onClick={scrollToTop()}/>
-            YouTube
+            <YouTubeIcon sx={{ color: red[600], fontSize: 30 }} onClick={scrollToTop()}/>YouTube
           </Typography>
         </Link>
       </div>
@@ -193,6 +193,7 @@ const Navbar = ({ setsearchedText }) => {
                   noWrap
                   component="div"
                   className="md:ps-2 pr-2 bg-black"
+                  onClick={scrollToTop()}
                 >
                   <YouTubeIcon sx={{ color: red[600], fontSize: 30 }} onClick={scrollToTop()}/>
                   YouTube
@@ -202,12 +203,12 @@ const Navbar = ({ setsearchedText }) => {
             <div className="flex items-center gap-1 md:gap-2">
               <SearchButton setsearchedText={setsearchedText} />
               <span>
-                {/* <AccountCircleOutlinedIcon sx={{ fontSize: 40 }} /> */}
+                <Link to='/about'>
                 <Avatar
                   alt="Remy Sharp"
                   src="/static/images/avatar/1.jpg"
                   sx={{ width: 40, height: 40 }}
-                />
+                /></Link>
               </span>
             </div>
           </div>

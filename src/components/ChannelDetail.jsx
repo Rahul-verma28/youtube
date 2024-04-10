@@ -20,7 +20,6 @@ const ChannelDetail = ({ setmainVideoId, channelId }) => {
 
         const data = await ChannelDetailsApi({ channelId });
         if (data && data.statistics.videoCount > 0) {
-          // Check if channelVideos exist for the channel
           setchannel(data);
           console.log(data);
           setLoading(false);
@@ -58,6 +57,12 @@ const ChannelDetail = ({ setmainVideoId, channelId }) => {
     }
   };
 
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = () => {
+    setSubscribed(!subscribed);
+  };
+
   return (
     <div className="md:pt-20 bg-black text-white w-full h-full ">
       {loading ? (
@@ -84,7 +89,7 @@ const ChannelDetail = ({ setmainVideoId, channelId }) => {
                     channel.snippet.thumbnails.default.url
                   }
                   alt="logo"
-                  className="w-[200px] h-[200px] rounded-full"
+                  className="h-[120px] w-[120px] sm:w-[200px] sm:h-[200px] rounded-full"
                 />
               </div>
               <div>
@@ -101,11 +106,13 @@ const ChannelDetail = ({ setmainVideoId, channelId }) => {
                 </p>
 
                 <Button
-                  variant="contained"
-                  color="error"
+                  // variant="contained"
+                  variant={subscribed ? "outlined" : "contained"}
+                  color={subscribed ? "success" : "error"}
                   sx={{ borderRadius: 10, my: 3 }}
+                  onClick={handleSubscribe}
                 >
-                  Subscribe
+                  {subscribed ? "Subscribed🔔" : "Subscribe"}
                 </Button>
               </div>
             </div>
@@ -126,7 +133,6 @@ const ChannelDetail = ({ setmainVideoId, channelId }) => {
                         channelVideos.snippet.thumbnails.high.url) ||
                       channelVideos.snippet.thumbnails.default.url
                     }
-                    // channelTitle={channelVideos.snippet.channelTitle}
                     publishedAt={channelVideos.snippet.publishedAt}
                   />
                 </Link>

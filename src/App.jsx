@@ -6,6 +6,7 @@ import ChannelDetail from "./components/ChannelDetail";
 import SearchDetails from "./components/SearchDetails";
 import Navbar from "./components/Navbar";
 import SideBar from "./components/SideBar";
+import AboutPage from "./components/About";
 
 function App() {
   const [mainVideoId, setmainVideoId] = useState("6mx2pSvnbhU");
@@ -39,6 +40,12 @@ function App() {
                 setmainVideoId={setmainVideoId}
                 setchannelId={setchannelId}
               />
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <AboutPage/>
             }
           />
           <Route

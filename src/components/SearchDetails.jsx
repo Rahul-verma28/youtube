@@ -42,7 +42,6 @@ const SearchDetails = ({ setmainVideoId, searchedText, setchannelId}) => {
     <div className="pt-20 px-5 bg-black text-white w-full">
       <p className="text-lg md:p-5">Looking for - <span className=" underline font-semibold text-xl ">{searchedText}</span></p>
       {loading ? (
-        // <Loader />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 p-5 md:px-10 mx-auto gap-5 ">
           {[...Array(6)].map((_, index) => (
             <Youtube key={index}/>

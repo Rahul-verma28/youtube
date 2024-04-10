@@ -48,16 +48,9 @@ export default function SearchAppBar({ setsearchedText }) {
       setSearchText('');
       scrollToTop();
     } else {
-      // Handle error: Show a message or prevent the search action
       alert('Please enter a search text');
     }
   };
-
-  // const handleKeyDown = (e) => {
-  //   if (e.key === 'Enter') {
-  //     handleSearch();
-  //   }
-  // };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
